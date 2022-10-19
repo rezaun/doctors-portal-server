@@ -19,13 +19,22 @@ async function run(){
         await client.connect();
         const serviceCollection = client.db('doctors_portal').collection('services');
 
+        /**
+         * API Naming COnvention
+         * app.get('/booking) //get all bookings in this collection. or get more than one or by filter
+         * app.get('/booking/:id) // get a specific booking
+         * app.post('/booking/) // add a new booking
+         * app.patch('/booking/:id) // update specific one
+         * app.delete('/booking/:id) // delete specific one
+        */
 
         app.get('/service', async(req, res) =>{
             const query = {};
             const cursor = serviceCollection.find(query);
             const services = await cursor.toArray();
             res.send(services);
-        })
+        });
+
 
 
 
